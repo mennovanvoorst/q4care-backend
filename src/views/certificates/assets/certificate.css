@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #1A202C;
+    font-family: "montserrat";
+}
+
+html {
+    zoom: 0.64;
+}
+
+body {
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4rem;
+    position: relative;
+}
+
+.background {
+    width: 100%;
+    height: 64px;
+}
+
+.logo {
+    width: 40%;
+    height: auto;
+    margin-bottom: 4rem;
+}
+
+.skill {
+    margin-bottom: 8rem;
+}
+
+.skill h2 {
+    font-weight: 300;
+}
+
+.skill h1 {
+    color: #E53E3E;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.person {
+    margin-bottom: 8rem;
+}
+
+.person h2 {
+    font-weight: 400;
+    color: #718096;
+    font-size: 1.2rem;
+}
+
+.person h1 {
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.candidate {
+    display: inline-block;
+    float: right;
+}
+
+.company {
+    display: inline-block;
+    float: left;
+}
+
+.company h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4rem;
+}
+
+.company h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.company h5 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #718096;
+}
+
+.candidate h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4rem;
+}
+
+.candidate h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.candidate h5 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #718096;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charest="utf-8" />
+    <title>CERTIFICAAT</title>
+    <link rel="stylesheet" href="certificate.css" />
+  </head>
+  <body>
+    <img src="background.png" class="background" />
+
+    <div class="container">
+      <img src="logo.png" class="logo" />
+
+      <div class="skill">
+        <h2>Certificaat voor het met een voldoende afronden van</h2>
+        <h1>{{ skill }}</h1>
+      </div>
+
+      <div class="person">
+        <h1>Uitgereikt aan {{ name }}</h1>
+        <h2>Behaald op {{ date }}</h2>
+      </div>
+
+      <div class="footer">
+        <div class="company">
+          <h3>Ronald Pruijssen</h3>
+          <h4>Trainer Q4care Opleidingen</h4>
+          <h5>Namens Q4Care</h5>
+        </div>
+
+        <div class="candidate">
+          <h3>Handtekening kandidaat</h3>
+          <h4>{{ date }}</h4>
+          <h5>{{ name }}</h5>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api": ["./src/api/index"],
+      "@sockets": ["./src/sockets/index"],
+      "@config": ["./src/config/index"],
+      "@interfaces/*": ["./src/interfaces/*.d.ts"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@models/*": ["./src/database/models/*"],
+      "@loaders/*": ["./src/loaders/*"],
+      "@middlewares/*": ["./src/api/middlewares/*"],
+      "@utils": ["./src/utils/index"],
+      "@constants": ["./src/constants/index"],
+      "@services/*": ["./src/services/*"],
+      "@views/*": ["./src/views/*"]
+    }
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 import { generateId } from "@utils";
@@ -17,6 +18,7 @@ import {
   BelongsTo,
   ForeignKey,
 } from "sequelize-typescript";
+import { USER_ROLES } from "@constants";
 import Class from "./class";
 import LoginToken from "./loginToken";
 import Skill from "./skill";
@@ -102,6 +104,38 @@ class User extends Model {
   @BeforeCreate
   static addId(instance: User) {
     instance.id = generateId();
+  }
+
+  async setAccess() {
+    try {
+      let userFlags = this.getDataValue("flags");
+      const userHasAlreadyAccess = !!(userFlags & USER_ROLES.paid);
+
+      if (!userHasAlreadyAccess) {
+        userFlags += USER_ROLES.paid;
+        await this.update({ flags: userFlags });
+      }
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async removeAccess() {
+    try {
+      let userFlags = this.getDataValue("flags");
+      const userHasAlreadyAccess = userFlags & USER_ROLES.paid;
+
+      if (userHasAlreadyAccess) {
+        userFlags -= USER_ROLES.paid;
+        await this.update({ flags: userFlags });
+      }
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 export interface ServerConfig {
   url: string;
   api: string;
+  webhookUrl: string;
 }
 export interface DatabaseConfig {
   host: string;
@@ -25,6 +26,10 @@ export interface YoutubeConfig {
   key: string;
 }
 
+export interface MollieConfig {
+  key: string;
+}
+
 export interface Config {
   app: AppConfig;
   database: DatabaseConfig;
@@ -35,4 +40,5 @@ export interface Config {
   secret: string;
   port: number;
   serverAuthToken: string;
+  mollie: MollieConfig;
 }

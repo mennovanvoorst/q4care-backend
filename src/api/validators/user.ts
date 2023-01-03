@@ -131,7 +131,7 @@ const updateById: Schema = {
     isInt: {
       options: {
         min: 0,
-        max: 14,
+        max: 30,
       },
       errorMessage: {
         code: "INVALID_ARGUMENT",
@@ -347,11 +347,33 @@ const create: Schema = {
     isInt: {
       options: {
         min: 0,
-        max: 14,
+        max: 30,
       },
       errorMessage: {
         code: "INVALID_ARGUMENT",
         message: "Flags is not valid",
+      },
+    },
+  },
+};
+
+const getPaymentsById: Schema = {
+  userId: {
+    in: "params",
+    exists: {
+      errorMessage: {
+        code: "MISSING_QUERY",
+        message: "userId is required",
+      },
+    },
+    isLength: {
+      options: {
+        min: 19,
+        max: 19,
+      },
+      errorMessage: {
+        code: "INVALID_PARAMETER",
+        message: "userId is not a valid id",
       },
     },
   },
@@ -367,4 +389,5 @@ export default {
   removeSkillById,
   generateCertificate,
   updateCurrentById,
+  getPaymentsById,
 };

@@ -4,7 +4,8 @@ import users from "./routes/users";
 import skills from "./routes/skills";
 import classes from "./routes/classes";
 import learningResource from "./routes/learningResource";
-import file from "./routes/files";
+import files from "./routes/files";
+import payments from "./routes/payments";
 
 export default (): Router => {
   const app = Router();
@@ -14,7 +15,8 @@ export default (): Router => {
   skills(app);
   classes(app);
   learningResource(app);
-  file(app);
+  files(app);
+  payments(app);
 
   return app;
 };

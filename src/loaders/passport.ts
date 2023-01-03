@@ -48,6 +48,8 @@ export default (): void => {
   });
 
   passport.deserializeUser(async (req: Request, user: UserModel, done) => {
-    done(null, user);
+    const newUser = await UserModel.scope(["profile"]).findByPk(user.id);
+
+    done(null, newUser);
   });
 };

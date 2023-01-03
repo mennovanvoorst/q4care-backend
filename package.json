@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mollie/api-client": "^3.6.0",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "connect-pg-simple": "^7.0.0",
@@ -33,7 +34,8 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "nodemon -r dotenv/config dotenv_config_path=.env.local",
+    "start": "nodemon -r dotenv/config dotenv_config_path=.env",
+    "dev": "nodemon -r dotenv/config dotenv_config_path=.env.local",
     "build": "webpack --mode production",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.ts",

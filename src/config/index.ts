@@ -21,6 +21,7 @@ const config: Config = {
   server: {
     url: process.env.SERVER_URL as string,
     api: process.env.API_PREFIX as string,
+    webhookUrl: process.env.WEBHOOK_URL as string,
   },
 
   mail: {
@@ -32,6 +33,10 @@ const config: Config = {
 
   youtube: {
     key: process.env.YOUTUBE_KEY as string,
+  },
+
+  mollie: {
+    key: process.env.MOLLIE_KEY as string,
   },
 };
 

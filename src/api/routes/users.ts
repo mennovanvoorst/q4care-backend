@@ -90,4 +90,12 @@ export default (app: Router): void => {
     validate(checkSchema(UserValidator.generateCertificate)),
     UserController.generateCertificate
   );
+
+  /* Returns a list of payment objects for the specified user ID */
+  route.get(
+    "/:userId/payments",
+    checkAuthentication,
+    validate(checkSchema(UserValidator.getPaymentsById)),
+    UserController.getPaymentsById
+  );
 };

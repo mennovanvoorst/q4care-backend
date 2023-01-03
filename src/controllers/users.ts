@@ -3,6 +3,7 @@ import { Error } from "@interfaces/error";
 import UserModel from "@models/user";
 import SkillModel from "@models/skill";
 import UserSkillModel from "@models/userSkill";
+import PaymentModel from "@models/payment";
 import certificate from "@services/certificate";
 import path from "path";
 import fs from "fs";
@@ -343,6 +344,31 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
+const getPaymentsById = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { userId } = req.params;
+
+    const payments = await PaymentModel.scope([
+      "default",
+      "withProduct",
+    ]).findAll({
+      where: { userId },
+    });
+
+    return res.status(200).json(payments);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).send({
+      code: "INTERNAL_ERROR",
+      message:
+        "The server encountered an internal error. Please retry the request.",
+    } as Error);
+  }
+};
+
 export default {
   create,
   list,
@@ -354,4 +380,5 @@ export default {
   addSkillById,
   removeSkillById,
   generateCertificate,
+  getPaymentsById,
 };

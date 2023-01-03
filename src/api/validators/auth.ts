@@ -3,6 +3,9 @@ import { Schema } from "express-validator";
 const loginToken: Schema = {
   email: {
     in: "body",
+    trim: {
+      options: [" "],
+    },
     exists: {
       errorMessage: {
         code: "MISSING_FIELD",

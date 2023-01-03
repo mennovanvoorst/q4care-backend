@@ -34,7 +34,7 @@ const generateLoginToken = async (
     await Mail.send(
       {
         to: user.email,
-        from: "noreply@slnt.stream",
+        from: "menno@sandwichdigital.nl",
         subject: "Your Q4Care login",
       },
       "login",

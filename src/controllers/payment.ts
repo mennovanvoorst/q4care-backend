@@ -8,6 +8,7 @@ import Mollie from "@services/mollie";
 import { Error } from "@interfaces/error";
 import checkPermissions from "@middlewares/checkPermissions";
 import { USER_ROLES } from "@constants";
+import { addDays } from "date-fns";
 
 const make = async (req: Request, res: Response): Promise<Response> => {
   const { productId, userId } = req.body;
@@ -37,6 +38,9 @@ const make = async (req: Request, res: Response): Promise<Response> => {
       value: product.value,
       currency: product.currency,
       paymentDate: new Date(),
+      expirationDate: product.daysValid
+        ? addDays(new Date(), product.daysValid)
+        : null,
     });
 
     const redirectUrl = `${config.app.url}/payments?id=${payment.id}`;

@@ -23,7 +23,12 @@ const generate = async (
   return pdf.create(document, {
     ...options,
     localUrlAccess: true,
-    base: `file:///${folder.replace(/\\/g, "/")}`,
+    base: `file:///${folder.replace(/\\/g, "/")}/`,
+    childProcessOptions: {
+      env: {
+        OPENSSL_CONF: "/dev/null",
+      },
+    },
   });
 };
 

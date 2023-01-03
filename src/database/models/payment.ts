@@ -30,7 +30,14 @@ export const PaymentStatus = {
 
 @Scopes({
   default: {
-    attributes: ["id", "status", "currency", "value", "paymentDate"],
+    attributes: [
+      "id",
+      "status",
+      "currency",
+      "value",
+      "paymentDate",
+      "expirationDate",
+    ],
   },
 
   withProduct: {
@@ -49,7 +56,7 @@ export const PaymentStatus = {
       {
         model: () => User,
         as: "user",
-        attributes: ["id", "firstName", "lastName"],
+        attributes: ["id", "firstName", "lastName", "flags"],
         required: false,
       },
     ],
@@ -92,6 +99,9 @@ class Payment extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @Column({ type: DataType.DATE, allowNull: true })
+  expirationDate: Date | null;
 
   @CreatedAt
   creationDate: Date;

@@ -90,6 +90,9 @@ const updateById: Schema = {
   email: {
     in: "body",
     optional: true,
+    trim: {
+      options: [" "],
+    },
     isEmail: {
       errorMessage: {
         code: "INVALID_ARGUMENT",
@@ -322,6 +325,9 @@ const create: Schema = {
   },
   email: {
     in: "body",
+    trim: {
+      options: [" "],
+    },
     exists: {
       errorMessage: {
         code: "MISSING_FIELD",

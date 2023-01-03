@@ -1,14 +1,17 @@
+/* eslint-disable no-bitwise */
 import { Request, Response } from "express";
 import { Error } from "@interfaces/error";
 import UserModel from "@models/user";
 import SkillModel from "@models/skill";
 import UserSkillModel from "@models/userSkill";
-import PaymentModel from "@models/payment";
+import PaymentModel, { PaymentStatus } from "@models/payment";
+import ProductModel from "@models/product";
 import certificate from "@services/certificate";
 import path from "path";
 import fs from "fs";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import stream from "stream";
+import { USER_ROLES } from "@constants";
 
 const list = async (req: Request, res: Response): Promise<Response> => {
   const { limit = "20", after } = req.params;
@@ -84,10 +87,13 @@ const updateById = async (req: Request, res: Response): Promise<Response> => {
         message: "User does not exist",
       } as Error);
 
+    if (flags !== user.flags && flags === USER_ROLES.paid)
+      await user.addAccessProduct();
+
     if (firstName) user.firstName = firstName;
     if (lastName) user.lastName = lastName;
     if (email) user.email = email;
-    if (flags) user.flags = flags;
+    if (flags !== null) user.flags = flags;
 
     await user.save();
 
@@ -332,6 +338,8 @@ const create = async (req: Request, res: Response): Promise<Response> => {
       email,
       flags,
     });
+
+    if (flags === USER_ROLES.paid) await user.addAccessProduct();
 
     return res.status(201).json(user);
   } catch (err: any) {

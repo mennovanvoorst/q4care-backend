@@ -16,6 +16,10 @@ module.exports = {
         status: DataTypes.TEXT,
         currency: DataTypes.TEXT,
         value: DataTypes.TEXT,
+        expiration_date: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
         payment_date: Sequelize.DATE,
         creation_date: Sequelize.DATE,
         updated_on: Sequelize.DATE,

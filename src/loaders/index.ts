@@ -1,10 +1,10 @@
 import { Application } from "express";
 import { Server } from "http";
 import "src/database/sequelize";
-import { Server as SocketServer } from "socket.io";
 
 import expressLoader from "./express";
 import passportLoader from "./passport";
+import cronLoader from "./cron";
 
 export default async ({
   expressApp,
@@ -14,6 +14,7 @@ export default async ({
   expressSession: any;
 }): Promise<{ server: Server }> => {
   await passportLoader();
+  await cronLoader();
 
   const server: Server = await expressLoader({
     app: expressApp,

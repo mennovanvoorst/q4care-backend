@@ -19,10 +19,13 @@ import {
   ForeignKey,
 } from "sequelize-typescript";
 import { USER_ROLES } from "@constants";
+import { addDays } from "date-fns";
 import Class from "./class";
 import LoginToken from "./loginToken";
 import Skill from "./skill";
 import UserSkill from "./userSkill";
+import ProductModel from "./product";
+import PaymentModel, { PaymentStatus } from "./payment";
 
 export enum UserFlags {
   NONE = 0,
@@ -135,6 +138,27 @@ class User extends Model {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  async addAccessProduct() {
+    const product = await ProductModel.scope(["default"]).findOne({
+      where: { name: "Access" },
+    });
+
+    if (product) {
+      await PaymentModel.create({
+        userId: this.getDataValue("id"),
+        productId: product.id,
+        externalId: null,
+        status: PaymentStatus.paid,
+        value: product.value,
+        currency: product.currency,
+        paymentDate: new Date(),
+        expirationDate: product.daysValid
+          ? addDays(new Date(), product.daysValid)
+          : null,
+      });
     }
   }
 }

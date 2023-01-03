@@ -9,6 +9,7 @@
     "connect-pg-simple": "^7.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cron": "^2.1.0",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.1",
     "dotenv-webpack": "^8.0.0",
@@ -46,6 +47,7 @@
     "db:seed:undo": "npx sequelize-cli db:seed:undo:all"
   },
   "devDependencies": {
+    "@types/cron": "^2.0.0",
     "@types/dotenv-webpack": "^7.0.3",
     "@types/express": "^4.17.13",
     "@types/humps": "^2.0.2",

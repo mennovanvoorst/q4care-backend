@@ -385,9 +385,32 @@ const getPaymentsById: Schema = {
   },
 };
 
+const destroy: Schema = {
+  userId: {
+    in: "params",
+    exists: {
+      errorMessage: {
+        code: "MISSING_QUERY",
+        message: "User id is required",
+      },
+    },
+    isLength: {
+      options: {
+        min: 19,
+        max: 19,
+      },
+      errorMessage: {
+        code: "INVALID_PARAMETER",
+        message: "Id is not valid",
+      },
+    },
+  },
+};
+
 export default {
   create,
   list,
+  destroy,
   getById,
   updateById,
   getSkillsById,

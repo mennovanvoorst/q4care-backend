@@ -49,7 +49,7 @@ export default (app: Router): void => {
     ResourceController.updateById
   );
 
-  /* Delete the class permanently */
+  /* Delete the resource permanently */
   route.delete(
     "/:resourceId",
     checkAuthentication,

@@ -30,12 +30,21 @@ const make = async (req: Request, res: Response): Promise<Response> => {
         message: "User does not exist",
       } as Error);
 
+    let paymentValue = product.value;
+    if (product.name === "Access") {
+      const totalAccessPayments = await PaymentModel.count({
+        where: { userId, status: PaymentStatus.paid },
+      });
+
+      if (totalAccessPayments === 0) paymentValue = "20.00";
+    }
+
     const payment = await PaymentModel.create({
       productId,
       userId,
       externalId: null,
       status: PaymentStatus.open,
-      value: product.value,
+      value: paymentValue,
       currency: product.currency,
       paymentDate: new Date(),
       expirationDate: product.daysValid
@@ -129,10 +138,10 @@ const list = async (req: Request, res: Response): Promise<Response> => {
   const { limit = "20", after } = req.params;
 
   try {
-    const users = await PaymentModel.scope(["default", "withProduct"]).findAll({
-      limit: parseInt(limit, 10),
-      offset: parseInt(0, 10),
-    });
+    const users = await PaymentModel.scope([
+      "default",
+      "withProduct",
+    ]).findAll();
 
     return res.status(200).json(users);
   } catch (err: any) {

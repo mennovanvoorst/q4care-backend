@@ -63,7 +63,7 @@ export default (app: Router): void => {
     ClassController.addStudentById
   );
 
-  /* Add a student to the specified class ID */
+  /* Remove a student from the specified class ID */
   route.delete(
     "/:classId/students",
     checkAuthentication,

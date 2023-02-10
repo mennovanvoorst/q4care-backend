@@ -7,7 +7,7 @@ module.exports = {
         name: "Access",
         description: "Toegang tot Q4Care portal",
         currency: "EUR",
-        value: "30.00",
+        value: "24.00",
         days_valid: 365,
         creation_date: new Date(),
         updated_on: new Date(),

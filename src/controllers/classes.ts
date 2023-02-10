@@ -10,8 +10,6 @@ const list = async (req: Request, res: Response): Promise<Response> => {
   try {
     const classes = await ClassModel.findAll({
       attributes: ["id", "name"],
-      limit: parseInt(limit, 10),
-      offset: parseInt(0, 10),
     });
 
     return res.status(200).json(classes);

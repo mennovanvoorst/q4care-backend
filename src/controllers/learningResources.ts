@@ -9,10 +9,7 @@ const list = async (req: Request, res: Response): Promise<Response> => {
   const { limit = "20", after } = req.params;
 
   try {
-    const classes = await ResourceModel.scope(["default"]).findAll({
-      limit: parseInt(limit, 10),
-      offset: parseInt(0, 10),
-    });
+    const classes = await ResourceModel.scope(["default"]).findAll();
 
     return res.status(200).json(classes);
   } catch (err: any) {

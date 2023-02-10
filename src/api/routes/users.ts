@@ -57,6 +57,15 @@ export default (app: Router): void => {
     UserController.updateCurrentById
   );
 
+  /* Delete the user permanently */
+  route.delete(
+    "/:userId",
+    checkAuthentication,
+    checkPermissions(USER_ROLES.admin),
+    validate(checkSchema(UserValidator.destroy)),
+    UserController.destroy
+  );
+
   /* Returns a list of skill objects for the specified user ID */
   route.get(
     "/:userId/skills",

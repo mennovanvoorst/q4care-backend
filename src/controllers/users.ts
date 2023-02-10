@@ -17,10 +17,7 @@ const list = async (req: Request, res: Response): Promise<Response> => {
   const { limit = "20", after } = req.params;
 
   try {
-    const users = await UserModel.scope(["profile"]).findAll({
-      limit: parseInt(limit, 10),
-      offset: parseInt(0, 10),
-    });
+    const users = await UserModel.scope(["profile"]).findAll();
 
     return res.status(200).json(users);
   } catch (err: any) {
@@ -377,6 +374,31 @@ const getPaymentsById = async (
   }
 };
 
+const destroy = async (req: Request, res: Response): Promise<Response> => {
+  const { userId } = req.params;
+
+  try {
+    const user = await UserModel.findByPk(userId);
+
+    if (!user)
+      return res.status(404).send({
+        code: "RESOURCE_NOT_FOUND",
+        message: "User does not exist",
+      } as Error);
+
+    await user.destroy();
+
+    return res.sendStatus(204);
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).send({
+      code: "INTERNAL_ERROR",
+      message:
+        "The server encountered an internal error. Please retry the request.",
+    } as Error);
+  }
+};
+
 export default {
   create,
   list,
@@ -389,4 +411,5 @@ export default {
   removeSkillById,
   generateCertificate,
   getPaymentsById,
+  destroy,
 };
